@@ -29,12 +29,12 @@
         {
             position: absolute;
             font-size: 24px;
-            animation: float 4s infinite ease-in-out;
+            animation: float 5s infinite ease-in-out;
         }
         .emoji1
         {
-            top: -40px;
-            left: -30px;
+            top: 10px;
+            left: -50px;
             animation-delay: 0s;
         }
         .emoji2 
