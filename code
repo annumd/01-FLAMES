@@ -13,6 +13,59 @@
             background-color: #d90166; /* Added hot pink background */
             color: white; /* Changed text color to white for better contrast */
         }
+        .floating-container 
+        {
+            position: relative;
+            display: inline-block;
+        }
+        .floating-text 
+        {
+            font-size: 48px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        .emoji 
+        {
+            position: absolute;
+            font-size: 24px;
+            animation: float 4s infinite ease-in-out;
+        }
+        .emoji1
+        {
+            top: -40px;
+            left: -30px;
+            animation-delay: 0s;
+        }
+        .emoji2 
+        {
+            top: -50px;
+            right: -30px;
+            animation-delay: 1s;
+        }
+        .emoji3 
+        {
+            bottom: -40px;
+            left: -30px;
+            animation-delay: 2s;
+        }
+        .emoji4 
+        {
+            bottom: -50px;
+            right: -30px;
+            animation-delay: 3s;
+        }
+        @keyframes float 
+        {
+            0%, 100% 
+            {
+                transform: translateY(0);
+            }
+            50% 
+            {
+                transform: translateY(-15px);
+            }
+        }
         .result 
         {
             margin-top: 20px;
@@ -48,7 +101,13 @@
     </style>
 </head>
 <body>
-    <h1>FLAMES Game</h1>
+    <div class="floating-container">
+        <h1 class="floating-text">FLAMES</h1>
+        <span class="emoji emoji1">❤️</span>
+        <span class="emoji emoji2">💖</span>
+        <span class="emoji emoji3">💘</span>
+        <span class="emoji emoji4">💕</span>
+    </div>
     <p>Enter two names to find out their relationship:</p>
     <form onsubmit="calculateFlames(); return false;">
         <input type="text" id="name1" placeholder="Name 1" required>
