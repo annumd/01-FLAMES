@@ -5,38 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLAMES Game</title>
     <style>
-        body {
-            font-family: Kidszone, Kidszone;
+        body 
+        {
+            font-family: Cursive;
             text-align: center;
             margin-top: 50px;
             background-color: #d90166; /* Added hot pink background */
             color: white; /* Changed text color to white for better contrast */
         }
-        .result {
+        .result 
+        {
             margin-top: 20px;
             font-size: 24px;
             font-weight: bold;
         }
-        form {
-            margin-bottom: 20px;
+        form 
+        {
+            margin-bottom: 50px;
         }
-        input[type="text"] {
+        input[type="text"] 
+        {
             padding: 10px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
             margin: 5px;
         }
-        button {
+        button 
+        {
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
             background-color: white;
-            color: hotpink;
+            color: #DE5D83;
             cursor: pointer;
         }
-        button:hover {
+        button:hover 
+        {
             background-color: lightpink;
         }
     </style>
@@ -60,9 +66,11 @@
             var relationship = ["Friends", "Love", "Affection", "Marriage", "Enemy", "Siblings"];
 
             // Calculate common letters
-            for (var i = 0; i < name1.length; i++) {
+            for (var i = 0; i < name1.length; i++) 
+            {
                 var char = name1[i];
-                if (name2.includes(char)) {
+                if (name2.includes(char)) 
+                {
                     name1 = name1.replace(char, '');
                     name2 = name2.replace(char, '');
                     i--; // Restart loop due to updated string
@@ -73,9 +81,12 @@
             var count = name1.length + name2.length;
             var index = count % flames.length;
 
-            if (index === 0) {
+            if (index === 0) 
+            {
                 index = flames.length - 1;
-            } else {
+            } 
+            else 
+            {
                 index = index - 1;
             }
 
