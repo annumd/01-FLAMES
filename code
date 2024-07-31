@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES Game</title>
+    <style>
+        body {
+            font-family: Kidszone, Kidszone;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #d90166; /* Added hot pink background */
+            color: white; /* Changed text color to white for better contrast */
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            color: hotpink;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: lightpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>FLAMES Game</h1>
+    <p>Enter two names to find out their relationship:</p>
+    <form onsubmit="calculateFlames(); return false;">
+        <input type="text" id="name1" placeholder="Name 1" required>
+        <input type="text" id="name2" placeholder="Name 2" required>
+        <button type="submit">Find FLAMES</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateFlames() {
+            var name1 = document.getElementById("name1").value.toLowerCase().replace(/\s+/g, '');
+            var name2 = document.getElementById("name2").value.toLowerCase().replace(/\s+/g, '');
+            
+            var flames = "FLAMES";
+            var relationship = ["Friends", "Love", "Affection", "Marriage", "Enemy", "Siblings"];
+
+            // Calculate common letters
+            for (var i = 0; i < name1.length; i++) {
+                var char = name1[i];
+                if (name2.includes(char)) {
+                    name1 = name1.replace(char, '');
+                    name2 = name2.replace(char, '');
+                    i--; // Restart loop due to updated string
+                }
+            }
+
+            // Calculate FLAMES index
+            var count = name1.length + name2.length;
+            var index = count % flames.length;
+
+            if (index === 0) {
+                index = flames.length - 1;
+            } else {
+                index = index - 1;
+            }
+
+            var result = relationship[index];
+            document.getElementById("result").innerText = "Your relationship is: " + result;
+        }
+    </script>
+</body>
+</html>
