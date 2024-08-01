@@ -27,13 +27,6 @@
             text-shadow: 0 0 5px #ff9, 0 0 10px #ff9, 0 0 15px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500;
             animation: fireFlicker 1.5s infinite alternate;
         }
-        .floating-text 
-        {
-            font-size: 48px;
-            font-weight: bold;
-            position: relative;
-            z-index: 1;
-        }
         .emoji 
         {
             position: absolute;
@@ -73,6 +66,17 @@
             50% 
             {
                 transform: translateY(-15px);
+            }
+        }
+         @keyframes fireFlicker 
+        {
+            0% 
+            {
+                text-shadow: 0 0 5px #ff9, 0 0 10px #ff9, 0 0 15px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500;
+            }
+            100% 
+            {
+                text-shadow: 0 0 10px #ffcc00, 0 0 15px #ff9933, 0 0 20px #ff6600, 0 0 25px #ff3300;
             }
         }
         .result 
@@ -157,7 +161,6 @@
             {
                 index = index - 1;
             }
-
             var result = relationship[index];
             document.getElementById("result").innerText = "Your relationship is: " + result;
         }
