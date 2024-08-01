@@ -219,7 +219,7 @@
 
 <!-- Spotify Embed -->
     <div id="spotify-container">
-        <iframe src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotify-player"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/43uRGlsrRRGJqaq8ZgmSgA?si=d67ca8a46f064e35C" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotify-player"></iframe>
     </div>
 
     <!-- Mute Button -->
@@ -278,7 +278,7 @@
             } 
             else 
             {
-                spotifyPlayer.src = "https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC";
+                spotifyPlayer.src = "https://open.spotify.com/embed/track/43uRGlsrRRGJqaq8ZgmSgA?si=d67ca8a46f064e35";
                 muteButton.querySelector('.mute-icon').innerText = "🔈";
             }
         });
