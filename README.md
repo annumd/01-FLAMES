@@ -1,4 +1,4 @@
-# 01
+# 01. FLAMES
 
 okay so my objective is to make a FLAMES bot!!!
 who doesnt know flames.
