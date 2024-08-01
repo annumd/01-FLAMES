@@ -111,6 +111,48 @@
         {
             background-color: lightpink;
         }
+        .mute-button 
+        {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            border: 5px solid #FFF;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: rotateDisc 5s linear infinite; /* Added rotation animation */
+            transition: transform 0.2s;
+        }
+        @keyframes rotateDisc 
+        {
+            0% 
+            {
+                transform: rotate(0deg);
+            }
+            100% 
+            {
+                transform: rotate(360deg);
+            }
+        }
+        .mute-button:hover 
+        {
+            transform: scale(1.1);
+        }
+        .mute-icon 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -128,6 +170,16 @@
         <button type="submit">Find FLAMES</button>
     </form>
     <div class="result" id="result"></div>
+
+ <!-- Spotify Embed -->
+    <div id="spotify-container">
+        <iframe src="https://open.spotify.com/embed/track/SPOTIFY_TRACK_ID" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotify-player"></iframe>
+    </div>
+
+    <!-- Mute Button -->
+    <div class="mute-button" id="mute-button">
+        <div class="mute-icon">🔈</div>
+    </div>
 
     <script>
         function calculateFlames() {
@@ -164,6 +216,22 @@
             var result = relationship[index];
             document.getElementById("result").innerText = "Your relationship is: " + result;
         }
+
+        // Mute button functionality
+        var isMuted = false;
+        var muteButton = document.getElementById('mute-button');
+        var spotifyPlayer = document.getElementById('spotify-player');
+
+        muteButton.addEventListener('click', function() {
+            isMuted = !isMuted;
+            if (isMuted) {
+                spotifyPlayer.src = "";
+                muteButton.querySelector('.mute-icon').innerText = "🔇";
+            } else {
+                spotifyPlayer.src = "https://open.spotify.com/embed/track/SPOTIFY_TRACK_ID";
+                muteButton.querySelector('.mute-icon').innerText = "🔈";
+            }
+        });
     </script>
 </body>
 </html>
