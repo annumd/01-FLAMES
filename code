@@ -12,6 +12,40 @@
             margin-top: 50px;
             background-color: #d90166; /* Added hot pink background */
             color: white; /* Changed text color to white for better contrast */
+            overflow: hidden; /* Hide overflow to prevent glitter from extending beyond the body */
+            position: relative;
+        }
+
+        .glitter /*added glitter to the background */
+        {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle, rgba(255, 223, 0, 0.3) 20%, transparent 20%) 0 0 / 15px 15px,
+                        radial-gradient(circle, rgba(255, 223, 0, 0.3) 20%, transparent 20%) 7.5px 7.5px / 15px 15px;
+            animation: glitter 1s infinite linear;
+        }
+        @keyframes glitter 
+        {
+            0% 
+            {
+                background-position: 0 0, 7.5px 7.5px;
+            }
+            100% 
+            {
+                background-position: 15px 15px, 22.5px 22.5px;
+            }
+        }
+        .content 
+        {
+            position: relative;
+            z-index: 2; /* Ensure content is above the glitter effect */
+            padding: 20px; /* Add padding to create space around form elements */
+            box-sizing: border-box; /* Include padding in element's total width and height */
         }
         .floating-container 
         {
@@ -88,6 +122,8 @@
         form 
         {
             margin-bottom: 50px;
+            position: relative;
+            z-index: 1; /* Ensure form is above the glitter effect */
         }
         input[type="text"] 
         {
@@ -96,6 +132,8 @@
             border: none;
             border-radius: 5px;
             margin: 5px;
+            position: relative;
+            z-index: 1; /* Ensure input boxes are above the glitter effect */
         }
         button 
         {
@@ -129,6 +167,7 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             animation: rotateDisc 5s linear infinite; /* Added rotation animation */
             transition: transform 0.2s;
+            z-index: 2; /* Ensure button is above the glitter effect */
         }
         @keyframes rotateDisc 
         {
@@ -153,9 +192,16 @@
             width: 100%;
             height: 100%;
         }
+        #spotify-container 
+        {
+            position: relative;
+            z-index: 1; /* Ensure Spotify iframe is above the glitter effect */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <div class="glitter"></div> <!-- Glitter effect overlay -->
     <div class="floating-container">
         <h1 class="floating-text">FLAMES</h1>
         <span class="emoji emoji1">❤️</span>
@@ -171,9 +217,9 @@
     </form>
     <div class="result" id="result"></div>
 
- <!-- Spotify Embed -->
+<!-- Spotify Embed -->
     <div id="spotify-container">
-        <iframe src="https://open.spotify.com/embed/track/SPOTIFY_TRACK_ID" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotify-player"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotify-player"></iframe>
     </div>
 
     <!-- Mute Button -->
@@ -222,13 +268,17 @@
         var muteButton = document.getElementById('mute-button');
         var spotifyPlayer = document.getElementById('spotify-player');
 
-        muteButton.addEventListener('click', function() {
+        muteButton.addEventListener('click', function() 
+        {
             isMuted = !isMuted;
-            if (isMuted) {
+            if (isMuted) 
+            {
                 spotifyPlayer.src = "";
                 muteButton.querySelector('.mute-icon').innerText = "🔇";
-            } else {
-                spotifyPlayer.src = "https://open.spotify.com/embed/track/SPOTIFY_TRACK_ID";
+            } 
+            else 
+            {
+                spotifyPlayer.src = "https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC";
                 muteButton.querySelector('.mute-icon').innerText = "🔈";
             }
         });
