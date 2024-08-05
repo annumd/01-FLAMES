@@ -2,6 +2,8 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config(); // To use environment variables
 
 const app = express();
 const port = 3000;
@@ -12,6 +14,7 @@ let namePairs = [];
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // Endpoint to handle form submission
 app.post('/send-names', (req, res) => {
@@ -20,23 +23,18 @@ app.post('/send-names', (req, res) => {
     // Store the name pair
     namePairs.push({ name1, name2 });
 
-    // Check if special name pair is submitted
-    if (name1 === '12345678' && name2 === '12345678') {
-        return res.status(200).json(namePairs);
-    }
-
     // Configure the email transport using nodemailer
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'your-email@gmail.com', // replace with your email
-            pass: 'your-email-password'   // replace with your email password
+            user: process.env.EMAIL_USER, // replace with your email
+            pass: process.env.EMAIL_PASS  // replace with your email password
         }
     });
 
     // Email options
     let mailOptions = {
-        from: 'your-email@gmail.com', // replace with your email
+        from: process.env.EMAIL_USER, // replace with your email
         to: 'annumdofficial@gmail.com',
         subject: 'FLAMES Game - Names Used',
         text: `Name 1: ${name1}, Name 2: ${name2}`
@@ -53,6 +51,20 @@ app.post('/send-names', (req, res) => {
     });
 });
 
+// Endpoint to retrieve all name pairs (protected)
+app.post('/get-names', (req, res) => {
+    const { adminPassword } = req.body;
+
+    // Check if the provided password matches the admin password
+    if (adminPassword !== process.env.ADMIN_PASSWORD) {
+        return res.status(403).send('Forbidden: Invalid password');
+    }
+
+    // Return the stored name pairs
+    res.status(200).json(namePairs);
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+2. Environment Variables
