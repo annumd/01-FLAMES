@@ -192,3 +192,30 @@ button:hover
     z-index: 1; /* Ensure Spotify iframe is above the glitter effect */
     margin-top: 20px;
 }
+
+/* Secret section styles */
+        #secretSection 
+{
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+        #namePairsList 
+        {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0; /* Remove default padding */
+            margin: 0; /* Remove default margin */
+        }
+
+        #namePairsList li 
+        {
+            margin-bottom: 10px; /* Space between list items */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
