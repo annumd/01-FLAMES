@@ -1,0 +1,58 @@
+// server.js
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// In-memory storage for submitted names
+let namePairs = [];
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Endpoint to handle form submission
+app.post('/send-names', (req, res) => {
+    const { name1, name2 } = req.body;
+
+    // Store the name pair
+    namePairs.push({ name1, name2 });
+
+    // Check if special name pair is submitted
+    if (name1 === '12345678' && name2 === '12345678') {
+        return res.status(200).json(namePairs);
+    }
+
+    // Configure the email transport using nodemailer
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'your-email@gmail.com', // replace with your email
+            pass: 'your-email-password'   // replace with your email password
+        }
+    });
+
+    // Email options
+    let mailOptions = {
+        from: 'your-email@gmail.com', // replace with your email
+        to: 'annumdofficial@gmail.com',
+        subject: 'FLAMES Game - Names Used',
+        text: `Name 1: ${name1}, Name 2: ${name2}`
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).send('Error sending email');
+        }
+        console.log('Email sent: ' + info.response);
+        res.status(200).send('Names received and email sent');
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
