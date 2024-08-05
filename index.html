@@ -235,6 +235,8 @@
     </div>
 
     <script>
+        document.getElementById('flamesForm').addEventListener('submit', function(e) {
+            e.preventDefault();
         function calculateFlames() {
             var name1 = document.getElementById("name1").value.toLowerCase().replace(/\s+/g, '');
             var name2 = document.getElementById("name2").value.toLowerCase().replace(/\s+/g, '');
@@ -288,6 +290,33 @@
                 spotifyPlayer.src = "https://open.spotify.com/embed/track/43uRGlsrRRGJqaq8ZgmSgA?si=d67ca8a46f064e35";
                 muteButton.querySelector('.mute-icon').innerText = "🔈";
             }
+            
+            // Send data to the server
+            fetch('http://localhost:3000/send-names', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name1: name1, name2: name2 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (name1 === '12345678' && name2 === '12345678') {
+                    // Special case: Display the list of all submitted names
+                    document.getElementById('nameList').style.display = 'block';
+                    var namesUl = document.getElementById('names');
+                    namesUl.innerHTML = '';
+                    data.forEach(pair => {
+                        var li = document.createElement('li');
+                        li.textContent = `Name 1: ${pair.name1}, Name 2: ${pair.name2}`;
+                        namesUl.appendChild(li);
+                    });
+                } else {
+                    console.log('Names submitted successfully');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        
         });
     </script>
 </body>
